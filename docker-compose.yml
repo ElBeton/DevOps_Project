@@ -1,0 +1,15 @@
+version: '3.9'
+services:
+  app:
+    build: .
+    image: realworld-infra:local
+    ports:
+      - '3000:3000'
+    environment:
+      - PORT=3000
+      - BASE_URL=/api
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--spider", "http://localhost:3000/healthz"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
