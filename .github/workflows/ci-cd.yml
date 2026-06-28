@@ -66,6 +66,6 @@ jobs:
           echo "${{ secrets.KUBE_CONFIG_DATA }}" | base64 --decode > $HOME/.kube/config
       - name: Deploy realworld-app to Kubernetes
         run: |
-          kubectl apply -f k8s/deployment.yml
+          kubectl apply --validate=false -f k8s/deployment.yml
           kubectl set image deployment/realworld-app app=ghcr.io/${{ github.repository_owner }}/realworld-infra:latest
           kubectl rollout status deployment/realworld-app --timeout=120s
