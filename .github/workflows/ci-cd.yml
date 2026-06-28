@@ -39,6 +39,8 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and push image
+        env:
+          REPO_OWNER: ${{ github.repository_owner }}
         run: |
-          docker build -t ghcr.io/${{ github.repository_owner }}/realworld-infra:latest .
-          docker push ghcr.io/${{ github.repository_owner }}/realworld-infra:latest
+          docker build -t ghcr.io/${REPO_OWNER,,}/realworld-infra:latest .
+          docker push ghcr.io/${REPO_OWNER,,}/realworld-infra:latest
